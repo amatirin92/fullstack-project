@@ -6,11 +6,6 @@ var Music = require('../models/music-schema');
 musicRoute
 
 
-// .get('/artists/', function(req,res){
-//     Music.find(function (err, artists){
-//         res.send(artists);
-//     })
-// })
 
 .post('/artists/:name', function(req, res){
     var newShout = new Music(req.body);
@@ -27,10 +22,11 @@ musicRoute
         var key = '4a845444a3aa5d88e98031ed96671efc';
         request('http://ws.audioscrobbler.com/2.0/?' + requesttype + 'artist=' + req.params.name + '&api_key=' + key + '&format=json', function (error, response, body) {
             var newEntry = JSON.parse(body);
-            console.log(newEntry.artist);
 
-            Music.findOne({artist: req.params.name}, function (err, shouts) {
-                newEntry.shouts = shouts;
+            Music.find({artist: req.params.name}, function (err, shouts) {
+               console.log(shouts.shoutbox)
+                console.log(shouts)
+                // newEntry.shoutbox = shouts;
                 res.send(newEntry);
             })
         })

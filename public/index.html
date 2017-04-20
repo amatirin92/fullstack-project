@@ -5,18 +5,23 @@
     <title>Title</title>
 </head>
 <body ng-controller="mainController">
+
+Enter your artist:
+
 <input ng-model="artist">
-<button ng-click="get(artist)">Find my artist</button>
+<button ng-click="getFromDatabase(artist)">Find my artist</button>
 
-<div ng-repeat ='item in shouts'>
-    {{item.shouts}}
-
-</div>
+{{newEntry.artist.name}}
+{{newEntry.artist.bio.summary}}
+{{newEntry.artist.stats.listeners}}
+{{newEntry.artist.stats.playcount}}
+{{newEntry.shoutbox[0].shoutbox}}
 
 <input ng-model="shout" type="text">
-<button ng-click="post({artist:artist, apiid: apiid, shoutbox:shout})">Post to shoutbox</button>
+<button ng-click="post(artist, {artist:artist, apiid: apiid, shoutbox:shout})">Post to shoutbox</button>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.js"></script>
 <script src="app.js"></script>
 <script src="main.js"></script>
 <script src="service.js"></script>
