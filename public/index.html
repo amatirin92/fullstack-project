@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="musicApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-controller="mainController">
+<input ng-model="artist">
+<button ng-click="get(artist)">Find my artist</button>
+
+<div ng-repeat ='item in shouts'>
+    {{item.shouts}}
+
+</div>
+
+<input ng-model="shout" type="text">
+<button ng-click="post({artist:artist, apiid: apiid, shoutbox:shout})">Post to shoutbox</button>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script src="app.js"></script>
+<script src="main.js"></script>
+<script src="service.js"></script>
+</body>
+</html>
+
+<!--
+
+! search for artists =>
+
+return artist information + shouts from the database
+if empty say "No shouts yet."
+if there are shouts, return them.
+
+allow user to add a new shout TO MY DATABASE.
+
+After the shout is posted, get all of the shouts and display them.
+
+When a new artist is searched for, rinse and repeat
+
+?Would I need to create a separate route for each artist with /:artist in my database?
+
+
+-->
