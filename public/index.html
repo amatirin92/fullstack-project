@@ -11,11 +11,14 @@ Enter your artist:
 <input ng-model="artist">
 <button ng-click="getFromDatabase(artist)">Find my artist</button>
 
-{{newEntry.artist.name}}
+<div>
 {{newEntry.artist.bio.summary}}
+ <img ng-src="{{photo}}">
 {{newEntry.artist.stats.listeners}}
 {{newEntry.artist.stats.playcount}}
-{{newEntry.shoutbox[0].shoutbox}}
+{{newEntry.shoutbox}}
+</div>
+
 
 <input ng-model="shout" type="text">
 <button ng-click="post(artist, {artist:artist, apiid: apiid, shoutbox:shout})">Post to shoutbox</button>

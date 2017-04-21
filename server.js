@@ -16,9 +16,6 @@ mongoose.connect('mongodb://localhost/musicme', function(err){
 
 
 
-
-
-
 app.listen(port, function(){
     console.log("server is listening at 8000");
 })

@@ -43,7 +43,7 @@ app
         $scope.getFromDatabase = function(artist){
             databaseService.getFromDatabase(artist).then(function(response){
                 $scope.newEntry = response;
-                $scope.photo = response.artist.image[0]["#text"];
+                $scope.photo = response.artist.image[3]["#text"];
             })
         }
     }]);
