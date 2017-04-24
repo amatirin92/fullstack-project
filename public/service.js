@@ -16,8 +16,8 @@ app.service('apiService', function($http){
 })
 
 app.service('databaseService', function($http){
-    this.postToDatabase = function(artist, newShout){
-        return $http.post('/artists/' + artist, newShout).then(function(response){
+    this.putToDatabase = function(artist, newShout){
+        return $http.put('/artists/' + artist, newShout).then(function(response){
             return response.data
         })
     }

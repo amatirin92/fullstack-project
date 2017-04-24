@@ -34,8 +34,8 @@ app
         //     })
         // };
 
-        $scope.post = function (newShout) {
-            databaseService.postToDatabase(newShout).then(function (response) {
+        $scope.putToDatabase = function (artist, newShout) {
+            databaseService.putToDatabase(artist,newShout).then(function (response) {
                 console.log(response);
             })
         }
