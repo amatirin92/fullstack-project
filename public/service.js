@@ -20,7 +20,7 @@ app.service('databaseService', function($http){
         return $http.put('/artists/' + artist, newShout).then(function(response){
             return response.data
         })
-    }
+    };
     this.getFromDatabase = function(artist){
         return $http.get('/artists/' + artist).then(function (response){
             return response.data

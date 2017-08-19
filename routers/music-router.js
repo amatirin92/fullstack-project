@@ -9,17 +9,7 @@ musicRoute
 .get('/', function (req,res){
     res.json({ message: 'hooray! welcome to our api!' });
 })
-
-
-// .post('/:name', function(req, res){
-//     var newShout = new Music(req.body);
-//     newShout.save(function(err, savedPost){
-//         if (err) throw err;
-//         res.send(savedPost);
-//     })
-// })
-
-    .get('/:name/:id', function(req,res){
+.get('/:name/:id', function(req,res){
         Music.findById(req.params.mbid, function(err,music){
             res.json(music);
         })
@@ -33,21 +23,26 @@ musicRoute
         request('http://ws.audioscrobbler.com/2.0/?' + requesttype + 'artist=' + req.params.name + '&api_key=' + key +
             '&format=json', function (error, response, body) {
             var newEntry = JSON.parse(body);
-            console.log(newEntry);
             Music.find({artist: newEntry.artist.name}, function (err, objectArray) {
                 newEntry.shoutbox = objectArray[0].shoutbox;
                 res.send(newEntry)
-                })
-            })
-        })
-
-    .put('/:name', function(req,res) {
-        Music.findOneAndUpdate({artist: req.params.name}, function(err, artist){
-            artist.shoutbox = newEntry.shoutbox;
-            return artist.save(function (err){
-                    return res.send(artist.shoutbox)
             })
         })
     })
+
+    //I want to post a new shout.
+    //Shouts are documents with the name of the artist and a shoutbox property.
+    //if the shoutbox doesn't exist, create a new one.
+    //else update it
+
+    .put('/:name', function(req,res) {
+        console.log(req.params);
+        console.log(req);
+
+        Music.findOneAndUpdate({artist: req.params.name}, req.body, function(err, artist){
+
+            res.send(artist.shoutbox);
+            })
+    });
 
 module.exports = musicRoute;

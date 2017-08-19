@@ -4,29 +4,46 @@
     <meta charset="UTF-8">
     <title>Music App</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/public/views/style.css">
 </head>
 <body ng-controller="mainController">
 
 Enter your artist:
-
 <input ng-model="artist">
-<button ng-click="getFromDatabase(artist)">Find my artist</button>
+<button ng-click="getFromDatabase(artist)" value="set background" ng-click="myStyle={'background-color':'blue'}">Find my artist</button>
 
 <div>
-{{newEntry.artist.bio.summary}}
- <img ng-src="{{photo}}">
-{{newEntry.artist.stats.listeners}}
-{{newEntry.artist.stats.playcount}}
+    <img class="img-circle" ng-src="{{photo}}">
+    <h2>Listeners: {{newEntry.artist.stats.listeners | number}}</h2>
+    <h2>Playcount: {{newEntry.artist.stats.playcount | number}}</h2>
+    {{newEntry.artist.bio.summary}}
     <div>
-{{newEntry.shoutbox}}
+        {{newEntry.shoutbox}}
+    </div>
+    <div id="player" style="position: absolute; top: -9999px; left: -9999px;"></div>
 </div>
-</div>
 
-
-<input ng-model="newShout" type="text">
-<button ng-click="putToDatabase(artist, newShout)">Post to shoutbox</button>
-
+<script src="http://www.youtube.com/player_api"></script>
+<script>
+    var info = document.getElementById('info');
+    function onYouTubePlayerAPIReady() {
+        var player = new YT.Player('player', {
+            videoId: 'gzeOWnnSNjg', // this is the id of the video at youtube (the stuff after "?v=")
+            loop: true,
+            events: {
+                onReady: function (e) {
+                    info.innerHTML = 'video is loaded';
+                    e.target.playVideo();
+                },
+                onStateChange: function (event) {
+                    if (event.data === 1) {
+                        info.innerHTML = 'video started playing';
+                    }
+                }
+            }
+        });
+    }
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-route.js"></script>
 <script src="app.js"></script>
